@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kook.shop.mapper.BoardMapper">
+	
+	<select id="getList" resultType="com.kook.shop.domain.BoardVO">
+		<![CDATA[select * from shop_board where bno > 0 ORDER BY BNO DESC]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.kook.shop.domain.BoardVO">
+		insert into shop_board (bno,title,content,username)
+		values (seq_shop_board.nextval, #{title}, #{content}, #{username})
+	</insert>
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
+			select seq_shop_board.nextval from dual
+		</selectKey>
+		insert into shop_board (bno,title,content,username)
+		values (#{bno},#{title},#{content},#{username})
+	</insert>
+	
+	<select id="read" resultType="com.kook.shop.domain.BoardVO">
+		select * from shop_board where bno =#{bno}
+	</select>
+	
+</mapper>

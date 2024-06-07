@@ -1,0 +1,15 @@
+
+-- 게시판 기능
+
+create table shop_board (
+bno number(10,0) not null,
+title varchar2(200) not null,
+content varchar2(2000) not null,
+username varchar2(50) not null,
+regdate date default sysdate,
+updatedate date default sysdate
+);
+
+-- 시퀀스 생성
+
+create sequence seq_shop_board nocache;
