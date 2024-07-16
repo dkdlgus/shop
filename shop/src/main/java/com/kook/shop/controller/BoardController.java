@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kook.shop.service.BoardService;
 
@@ -27,21 +26,6 @@ public class BoardController {
 		
 		model.addAttribute("list", service.getList());
 		
-	}
-	
-	//등록화면
-	@GetMapping("/register")
-	public void register() {
-		log.info("register");
-	}
-	
-	@GetMapping("/get")
-	public void get(@RequestParam("bno") Long bno, Model model){
-		
-		log.info("get");
-		
-		model.addAttribute("board", service.get(bno));
-				
 	}
 		
 }

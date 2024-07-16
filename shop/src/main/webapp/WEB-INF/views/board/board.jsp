@@ -30,10 +30,6 @@
 <link rel="stylesheet" href="../css/myCss.css?after"> <!-- 수정시 바로 적용을 위해 after추가 -->
 </head>
 <body>
-<footer class="copyright py-4 mt-auto text-center text-white">
-    <div class="footer container">
-    	<small>Copyright &copy; Your Website 2023</small>
-    </div>
-</footer>
+
 </body>
 </html>

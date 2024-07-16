@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kook.shop.mapper.ListMapper">
+	
+	<insert id="insert" parameterType="com.kook.shop.domain.ListVO">
+    	<selectKey keyProperty="rno" resultType="long" order="BEFORE">
+        	SELECT seq_shop_list.nextval FROM dual
+    	</selectKey>
+    		INSERT INTO shop_list (rno, sname, money)
+    		VALUES (#{rno}, #{sname}, #{money})
+	</insert>
+	
+	<select id="read" resultType="com.kook.shop.domain.ListVO">
+		select * from shop_list where rno = #{rno}
+	</select>
+	
+	<delete id="delete">
+		delete from shop_list where rno = #{rno}
+	</delete>
+	
+	<update id="update">
+		update shop_list set sname = #{sname}, money = #{money}
+		where rno = #{rno}
+	</update>
+	
+	<select id="getList" resultType="com.kook.shop.domain.ListVO">
+		select rno, sname, money
+		from shop_list
+		order by rno asc
+	</select>
+	
+</mapper>

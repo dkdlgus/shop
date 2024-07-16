@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kook.shop.mapper.ListImageMapper">
+
+	<insert id="insert" parameterType="com.kook.shop.domain.ListImageVO">
+		insert into shop_image (uuid, uploadpath, filename, filetype, rno)
+		values (#{uuid}, #{uploadpath}, #{filename}, #{filetype}, #{rno})
+	</insert>
+	
+	<delete id="delete">
+		delete from shop_image where uuid = #{uuid}
+	</delete>
+	
+	<select id="findByRno" resultType="com.kook.shop.domain.ListImageVO">
+		select * from shop_image where rno = #{rno}
+	</select>
+	
+	<delete id="deleteAll">
+		delete shop_image where rno = #{rno}
+	</delete>
+	
+	<select id="getOldFiles" resultType="com.kook.shop.domain.ListImageVO">
+		select * from shop_image where uploadpath = to_char(sysdate -1, 'yyyy/mm/dd')
+	</select>
+
+</mapper>

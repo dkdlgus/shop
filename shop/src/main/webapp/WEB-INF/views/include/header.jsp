@@ -30,6 +30,26 @@
 <link rel="stylesheet" href="../css/myCss.css?after"> <!-- 수정시 바로 적용을 위해 after추가 -->
 </head>
 <body>
-<h2>여기는 상단 부분입니다.</h2>
+
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase sticky-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="../home/home">상점</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            메뉴
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">상품권</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../board/list">게시판</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">고객센터</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">로그인</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 </body>
 </html>
