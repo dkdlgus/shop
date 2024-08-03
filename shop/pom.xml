@@ -12,7 +12,16 @@
 		<org.springframework-version>5.3.26</org.springframework-version>
 		<org.aspectj-version>1.9.7</org.aspectj-version>
 		<org.slf4j-version>2.0.0</org.slf4j-version>
+		<spring.security.version>5.3.13.RELEASE</spring.security.version>
 	</properties>
+	
+	<repositories>
+		<repository>
+    		<id>jitpack.io</id>
+    		<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -242,6 +251,36 @@
 		    <artifactId>quartz-jobs</artifactId>
 		    <version>2.3.2</version>
 		</dependency>
+		
+		<!-- spring security 추가 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency> 
+		
+		<!-- iamport 아임포트 -->
+		<dependency>
+    		<groupId>com.github.iamport</groupId>
+    		<artifactId>iamport-rest-client-java</artifactId>
+    		<version>0.2.22</version>
+		</dependency>
+
 		
 	</dependencies>
     <build>

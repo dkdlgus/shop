@@ -74,7 +74,7 @@ $(document).ready(function(){
 			str += "<div class='portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100'>";
             if (list[i].imageList && list[i].imageList.length > 0) {
                 let firstImage = list[i].imageList[0]; // 첫 번째 이미지만 표시
-                let fileCallPath = encodeURIComponent(firstImage.uploadpath + "/s_" + firstImage.uuid + "_" + firstImage.filename);
+                let fileCallPath = encodeURIComponent(firstImage.uploadpath + "/" + firstImage.uuid + "_" + firstImage.filename);
                 str += "<img class='img-fluid fixed-size' src='../image/display?filename=" + fileCallPath + "' alt='...' />";
             } else {
                 str += "<img class='img-fluid fixed-size' src='../images/cabin.png' alt='...' />"; // 이미지 없을 때 기본 이미지 표시
@@ -82,7 +82,11 @@ $(document).ready(function(){
         	str += "</div>";
 			str += "</div>";
 			str += "<strong class='text-dark font-weight-bold'>" + list[i].sname + "</strong>";
-			str += "<p class='text-dark font-weight-bold'><span class='text-danger'>" + list[i].money.toLocaleString() + "</span> 원</p>";
+			str += "<p>";
+			str += "<span class='text-danger font-weight-bold' style='font-size: 24px;'>" + list[i].discount + "%</span> ";
+			str += "<span class='text-dark font-weight-bold' style='font-size: 24px;'>" + list[i].moneyshop.toLocaleString() + "원</span> ";
+			str += "<span style='text-decoration: line-through; color: #d3d3d3;'> " + list[i].money.toLocaleString() + "원</span>";
+			str += "</p>";
 			str += "</div>";
 		}
 		
@@ -96,6 +100,8 @@ $(document).ready(function(){
 	
 	let modalInputTitle = modal.find("input[name='sname']");
 	let modalInputMoney = modal.find("input[name='money']");
+	let modalInputDiscount = modal.find("input[name='discount']");
+	let modalInputMoneyshop = modal.find("input[name='moneyshop']");	
 	
 	let modalRegisterBtn = $("#modalRegisterBtn");
 	let modalModifyBtn = $("#modalModifyBtn");
@@ -110,6 +116,8 @@ $(document).ready(function(){
 		let data = {
 			sname: modalInputTitle.val(),
 			money: modalInputMoney.val(),
+			discount: modalInputDiscount.val(),
+			moneyshop: modalInputMoneyshop.val(),
 			imageList: []
 		};
 
@@ -150,6 +158,8 @@ $(document).ready(function(){
 	        
 			modalInputTitle.val(sname.sname);
 			modalInputMoney.val(sname.money);
+			modalInputDiscount.val(sname.discount);
+			modalInputMoneyshop.val(sname.moneyshop);
 			modal.data("rno", sname.rno);
 			
 			// 이미지 리스트 초기화
@@ -158,7 +168,7 @@ $(document).ready(function(){
 			// 이미지 리스트를 모달에 추가
 	        if (sname.imageList && sname.imageList.length > 0) {
 	            sname.imageList.forEach(function(image) {
-	                let fileCallPath = encodeURIComponent(image.uploadpath + "/s_" + image.uuid + "_" + image.filename);
+	                let fileCallPath = encodeURIComponent(image.uploadpath + "/" + image.uuid + "_" + image.filename);
 	                let imgStr = "<div class='card' data-uuid='" + image.uuid + "' data-path='" + image.uploadpath + "' data-filename='" + image.filename + "' data-type='" + image.filetype + "'>";
 	                imgStr += "<img src='../image/display?filename=" + fileCallPath + "' style='object-fit:cover; width: 100%; height: 100%;' alt='Image' />";
 	                imgStr += "</div>";
@@ -198,6 +208,8 @@ $(document).ready(function(){
 			rno : modal.data("rno"),
 			sname : modalInputTitle.val(),
 			money : modalInputMoney.val(),
+			discount: modalInputDiscount.val(),
+			moneyshop: modalInputMoneyshop.val(),
 			imageList : imageList
 		};
 		

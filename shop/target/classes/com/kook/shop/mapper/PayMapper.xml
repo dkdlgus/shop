@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.kook.shop.mapper.PayMapper">
+	
+	<insert id="insertPayment" parameterType="com.kook.shop.domain.PayVO">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			SELECT seq_shop_payments.nextval FROM dual
+		</selectKey>
+			INSERT INTO shop_payments (
+			id, userid, impuid, merchantuid, amount, status, paidat, failedat, createdat, updatedat 
+			) VALUES (
+			#{id}, #{userid}, #{impuid}, #{merchantuid}, #{amount}, #{status}, #{paidat}, #{failedat}, CORRENT_TIMESTAMP, CURRENT_TIMESTAMP
+			)
+	</insert>
+	
+	<select id="getPaymentById" parameterType="long" resultType="com.kook.shop.domain.PayVO">
+		SELECT * FROM shop_payments WHERE id = #{id}
+	</select>
+	
+	<select id="getPaymentsByUserId" parameterType="long" resultType="com.kook.shop.domain.PayVO">
+		SELECT * FROM shop_payments WHERE userid = #{userid}
+	</select>
+	
+	<update id="updatePayment" parameterType="com.kook.shop.domain.PayVO">
+		UPDATE shop_payments
+		SET
+		userid = #{userid},
+		impuid = #{impuid},
+		merchantuid = #{merchantuid},
+		amount = #{amount},
+		status = #{status},
+		paidat = #{paidat},
+		failedat = #{failedat},
+		updatedat = CURRENT_TIMESTAMP
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deletePayment" parameterType="long">
+		DELETE FROM shop_payments WHERE id = #{id}
+	</delete>
+	
+</mapper>

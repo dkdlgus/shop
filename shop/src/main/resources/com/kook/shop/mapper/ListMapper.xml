@@ -9,8 +9,8 @@
     	<selectKey keyProperty="rno" resultType="long" order="BEFORE">
         	SELECT seq_shop_list.nextval FROM dual
     	</selectKey>
-    		INSERT INTO shop_list (rno, sname, money)
-    		VALUES (#{rno}, #{sname}, #{money})
+    		INSERT INTO shop_list (rno, sname, money, discount, moneyshop)
+    		VALUES (#{rno}, #{sname}, #{money}, #{discount}, #{moneyshop})
 	</insert>
 	
 	<select id="read" resultType="com.kook.shop.domain.ListVO">
@@ -22,12 +22,12 @@
 	</delete>
 	
 	<update id="update">
-		update shop_list set sname = #{sname}, money = #{money}
+		update shop_list set sname = #{sname}, money = #{money}, discount = #{discount}, moneyshop = #{moneyshop}
 		where rno = #{rno}
 	</update>
 	
 	<select id="getList" resultType="com.kook.shop.domain.ListVO">
-		select rno, sname, money
+		select rno, sname, money, discount, moneyshop
 		from shop_list
 		order by rno asc
 	</select>

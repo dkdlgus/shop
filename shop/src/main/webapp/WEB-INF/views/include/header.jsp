@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %> 
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,6 +22,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--iamport -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!--icon -->
 <!--fontawesome icon-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
@@ -31,7 +34,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase sticky-top" id="mainNav">
+<nav class="navbar navbar-expand-lg bg-light-brown text-uppercase sticky-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="../home/home">상점</a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -41,11 +44,26 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">상품권</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../board/list">게시판</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">고객센터</a></li>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../board/AdminList">게시판</a></li>
+                </sec:authorize>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../board/board">고객센터</a></li>
             </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">로그인</a></li>
+            <ul class="navbar-nav ml-auto">
+            	<!-- 로그인 안한 경우 -->
+            	<sec:authorize access="isAnonymous()">
+                	<li class="nav-item mx-0 mx-lg-1">
+                		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="../member/customLogin">로그인</a>
+                	</li>
+                	<li class="nav-item mx-0 mx-lg-1">
+                		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="../member/customJoin">회원가입</a>
+                	</li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                	<li class="nav-item mx-0 mx-lg-1">
+                		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="../member/customLogout">로그아웃</a>
+                	</li>
+                </sec:authorize>
             </ul>
         </div>
     </div>
