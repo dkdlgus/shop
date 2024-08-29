@@ -11,6 +11,8 @@ public class MemberVO {
 	private String userid;
 	private String userpw;
 	private String username;
+	private String useremail;
+	private String tell;
 	private Date regdate;
 	private Date updatedate;
 	

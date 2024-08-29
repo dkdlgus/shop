@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %> 
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>   
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,7 +84,7 @@
                         <div class="image mb-3" data-rno="${list.rno}">
                             <!-- 이미지가 여기에 삽입됩니다 -->
                         </div>
-                        <h5 class="card-title font-weight-bold text-dark">${list.sname}</h5>
+                        <h5 class="card-title font-weight-bold text-dark" data-name="${list.sname}" data-price="${list.moneyshop}">${list.sname}</h5>
                         <p class="card-text">
                             <span class="text-danger font-weight-bold" style="font-size: 24px;">${list.discount}%</span>
                             <span class="text-dark font-weight-bold" style="font-size: 24px;">
@@ -163,14 +164,99 @@ var swiper = new Swiper('.swiper-container', {
                 $("#modalDiscount").text(data.discount.toLocaleString() + '%');
                 $("#modalDiscountedPrice").text(data.moneyshop.toLocaleString() + '원');
                 $("#productModal").modal("show");
+                $("#modalRno").val(rno); // rno 값을 hidden input에 설정
             });
         });
         
     });
 })();
 </script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script>
+let user = {
+    username: "${username}",
+    email: "${email}",
+    tell: "${tell}"        
+};
 
+let modal = $("#productModal");
 
+// 결제 API 호출
+IMP.init("imp00365056"); // 식별코드를 사용하여 초기화
 
+let button = document.querySelector("#pBtn");
+
+let onClickPay = async () => {
+    
+	button.disabled = true; // 버튼 중복클릭 방지. 비활성화
+	
+	console.log("Payment request initiated.");
+	
+	// 모달에서 상품 정보 가져오기
+    let productName = document.getElementById('modalName').innerText;
+    let productPriceStr = document.getElementById('modalDiscountedPrice').innerText;
+    let productPrice = parseFloat(productPriceStr.replace(/[^0-9.-]/g, '')); // 가격에서 숫자만 추출하고 변환
+    let rno = document.getElementById('modalRno').value;
+    
+    // 고유한 merchant_uid 생성
+    let uniqueMerchantUid = "ORD" + new Date().getTime() + Math.floor(Math.random() * 1000);
+    
+    try {
+    	
+    	console.log("Sending order information to server.");
+    	
+        let orderResponse = await fetch('../home/order', { // 주문 정보를 저장할 엔드포인트
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rno: rno,
+                merchantuid: uniqueMerchantUid,
+                name: productName,
+                amount: productPrice,
+                buyer_name: user.username,
+                buyer_email: user.email,
+                buyer_tel: user.tell
+            })
+        });
+        
+        if (!orderResponse.ok) {
+            throw new Error('주문 정보 저장 실패');
+        }
+		
+        console.log("Order information saved successfully.");
+        
+        // 결제 API 호출
+        IMP.request_pay({
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            amount: productPrice,
+            name: productName,
+            merchant_uid: uniqueMerchantUid,
+            buyer_email: user.email,
+            buyer_name: user.username,
+            buyer_tel: user.tell,
+        }, async function(response) {
+        	button.disabled = false; // 결제 완료 후 버튼 활성화
+            if (response.success) {
+            	console.log("Payment success response:", response);
+                alert("결제가 완료되었습니다.");
+				modal.modal("hide");
+            } else {
+                alert("결제 실패: " + response.error_msg);
+            }
+        });
+
+    } catch (error) {
+        console.error('Error saving order:', error);
+        alert('주문 정보 저장 중 오류가 발생했습니다.');
+    }
+    
+    button.disabled = false; // 버튼 다시 활성화
+};
+
+button.addEventListener("click", onClickPay);
+</script>
 </body>
 </html>

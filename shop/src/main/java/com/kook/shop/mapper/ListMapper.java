@@ -14,5 +14,7 @@ public interface ListMapper {
 	
 	public int update(ListVO shopList);
 	
+	public ListVO getBySname(String sname);
+	
 	public List<ListVO> getList();
 }

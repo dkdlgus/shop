@@ -63,6 +63,8 @@
     						<span id="modalDiscountedPrice" class="d-inline" style="font-size: 28px; color: black; font-weight: 900; margin-right: 10px;"></span>
     						<span id="modalPrice" class="font-weight-bold d-inline" style="font-size: 20px; text-decoration: line-through; color: #d3d3d3; margin-right: 10px;"></span>
 						</div>
+						<!-- rno 값을 저장할 hidden input -->
+                        <input type="hidden" id="modalRno" value="">
                     </div>
                 </div>
             </div>

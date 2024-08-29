@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class ListVO {
 	
-	private Long rno;
-	private String sname;
-	private Long money;
-	private Long discount;
-	private Long moneyshop;
+	private Long rno; // 번호
+	private String sname; // 상품이름
+	private Long money; // 상품금액
+	private Long discount; // 할인율
+	private Long moneyshop; // 할인된 금액
 	
 	private List<ListImageVO> imageList; // 이미지
 	

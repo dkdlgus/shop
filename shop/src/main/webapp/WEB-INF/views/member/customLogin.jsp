@@ -18,15 +18,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8,IE=EmulateIE9"/> 
 </head>
 <style>
-#loginContent {
-    max-width: 400px;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
 #login-card {
     padding: 20px;
+}
+#title {
+	
 }
 #formLabel {
     text-align: right;
@@ -49,36 +45,25 @@
 
 <%@include file="../include/header.jsp" %>
 
-<div class="container" id="loginContent">
+<div class="container mt-5" id="loginContent">
 	<div id="login-card">
 		<!-- 
 		<div class="login-card-logo">
 			<img src="../images/cake.png" alt="logo">
 		</div>
 		 -->
-		 <h4><c:out value="${logout}"/></h4>
+		 <h2 class="title">로그인</h2>
+		 <hr style="border: 1px solid black;"></hr><br></br>
 		 <form id="loginForm" method='post' action="../login">
 		 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		 	<div class="form-group">
-		 		<div class="row">
-		 			<div class="col-md-4">
-		 				<label for="uId" id="formLabel">아이디</label>
-		 			</div>
-		 			<div class="col-md-8">
-		 				<input type="text" class="form-control" name="username" placeholder="아이디 입력" id="uId" required />
-		 				<span style="color:red;"><c:out value="${error}"/></span>
-		 			</div>
-		 		</div>
+ 				<label for="uId" id="formLabel">아이디 : </label>
+ 				<input type="text" class="form-control" name="username" placeholder="아이디 입력" id="uId" required />
+ 				<span style="color:red;"><c:out value="${error}"/></span>
 		 	</div>
 		 	<div class="form-group">
-		 		<div class="row">
-		 			<div class="col-md-4">
-		 				<label for="uPw" id="formLabel">비밀번호</label>
-		 			</div>
-		 			<div class="col-md-8">
-		 				<input type="password" class="form-control" name="password" placeholder="비밀번호 입력" id="uPw" required />
-		 			</div>
-		 		</div>
+ 				<label for="uPw" id="formLabel">비밀번호 : </label>
+ 				<input type="password" class="form-control" name="password" placeholder="비밀번호 입력" id="uPw" required />
 		 	</div>
 		 	<div class="form-group form-check">
 		 		<input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me" checked />

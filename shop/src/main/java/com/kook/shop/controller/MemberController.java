@@ -24,6 +24,11 @@ public class MemberController {
 	@Setter(onMethod_ = @Autowired)
 	private MemberService mservice;
 	
+	@GetMapping("/custom")
+	public void custom() {
+		log.info("custom...");
+	}
+	
 	@GetMapping("/customJoin")
 	public void customJoin() {
 		log.info("customJoin....");

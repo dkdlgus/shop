@@ -15,7 +15,7 @@
 	
 	<!-- security 최소 동작을 위한 설정 -->
 	<security:http>
-		
+
 		<security:intercept-url pattern="/member/all" access="permitAll" />
 		
 		<!-- 권한 ROLE_ 은 로그인 해야만 주어짐 -->

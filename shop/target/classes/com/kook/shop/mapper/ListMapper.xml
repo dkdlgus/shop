@@ -17,6 +17,10 @@
 		select * from shop_list where rno = #{rno}
 	</select>
 	
+	<select id="getBySname" resultType="com.kook.shop.domain.ListVO">
+		select * from shop_list where sname = #{sname}
+	</select>
+	
 	<delete id="delete">
 		delete from shop_list where rno = #{rno}
 	</delete>

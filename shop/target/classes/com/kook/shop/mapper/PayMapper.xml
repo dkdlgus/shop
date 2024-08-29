@@ -5,25 +5,54 @@
  
 <mapper namespace="com.kook.shop.mapper.PayMapper">
 	
+	<!-- 결제정보 삽입 -->
 	<insert id="insertPayment" parameterType="com.kook.shop.domain.PayVO">
 		<selectKey keyProperty="id" resultType="long" order="BEFORE">
 			SELECT seq_shop_payments.nextval FROM dual
 		</selectKey>
 			INSERT INTO shop_payments (
-			id, userid, impuid, merchantuid, amount, status, paidat, failedat, createdat, updatedat 
+			id, pg, impuid, merchantuid, name, amount, buyer_name, buyer_email, buyer_tel 
 			) VALUES (
-			#{id}, #{userid}, #{impuid}, #{merchantuid}, #{amount}, #{status}, #{paidat}, #{failedat}, CORRENT_TIMESTAMP, CURRENT_TIMESTAMP
+			#{id}, #{pg}, #{impuid}, #{merchantuid}, #{name}, #{amount}, #{buyer_name}, #{buyer_email}, #{buyer_tel}
 			)
 	</insert>
 	
+	<!-- ID결제정보 조회 -->
 	<select id="getPaymentById" parameterType="long" resultType="com.kook.shop.domain.PayVO">
 		SELECT * FROM shop_payments WHERE id = #{id}
 	</select>
 	
-	<select id="getPaymentsByUserId" parameterType="long" resultType="com.kook.shop.domain.PayVO">
-		SELECT * FROM shop_payments WHERE userid = #{userid}
+	<!-- ImpUid 조회 -->
+	<select id="getPaymentByImpUid" parameterType="string" resultType="com.kook.shop.domain.PayVO">
+		SELECT * FROM shop_payments WHERE impuid = #{impuid}
 	</select>
 	
+	<!-- 주문정보 삽입 -->
+	<insert id="insertOrder" parameterType="com.kook.shop.domain.OrderVO">
+		<selectKey keyProperty="orderid" resultType="long" order="BEFORE">
+			SELECT seq_shop_order.nextval FROM dual
+		</selectKey>
+			INSERT INTO shop_order (
+			orderid, rno, merchantuid, name, amount, buyer_name, buyer_email, buyer_tel 
+			) VALUES (
+			#{orderid}, #{rno}, #{merchantuid}, #{name}, #{amount}, #{buyer_name}, #{buyer_email}, #{buyer_tel}
+			)
+	</insert>
+	<!-- 주문정보 조회 -->
+	<select id="getOrderByMerchantUid" parameterType="string" resultType="com.kook.shop.domain.OrderVO">
+		SELECT * FROM shop_order WHERE merchantuid = #{merchantuid}
+	</select>
+	
+	<!-- 사용자ID로 결제정보 조회 -->
+	<!-- 
+	<select id="getPaymentsByUserId" parameterType="string" resultType="com.kook.shop.domain.PayVO">
+		SELECT * FROM shop_payments WHERE userid = #{userid}
+	</select>
+	 -->
+	 
+	 
+	<!-- 결제정보 업데이트 -->
+	<!-- 
 	<update id="updatePayment" parameterType="com.kook.shop.domain.PayVO">
 		UPDATE shop_payments
 		SET
@@ -32,14 +61,16 @@
 		merchantuid = #{merchantuid},
 		amount = #{amount},
 		status = #{status},
-		paidat = #{paidat},
-		failedat = #{failedat},
-		updatedat = CURRENT_TIMESTAMP
+		paidat = #{paidat}
 		WHERE id = #{id}
 	</update>
-	
+	 -->
+	 
+	<!-- 결제정보 삭제 -->
+	<!-- 
 	<delete id="deletePayment" parameterType="long">
 		DELETE FROM shop_payments WHERE id = #{id}
 	</delete>
+	 -->
 	
 </mapper>

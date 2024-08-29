@@ -1,5 +1,4 @@
-
--- ê²Œì‹œíŒ ê¸°ëŠ¥
+-- °øÁö»çÇ× °Ô½ÃÆÇ
 
 create table shop_board (
 bno number(10,0) not null,
@@ -10,6 +9,6 @@ regdate date default sysdate,
 updatedate date default sysdate
 );
 
--- ì‹œí€€ìŠ¤ ìƒì„±
-
+-- °øÁö»çÇ× °Ô½ÃÆÇ ½ÃÄö½º
 create sequence seq_shop_board nocache;
+

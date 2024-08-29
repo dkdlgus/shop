@@ -10,6 +10,8 @@
 		<result property="userid" column="userid" />
 		<result property="userpw" column="userpw" />
 		<result property="username" column="username" />
+		<result property="useremail" column="useremail" />
+		<result property="tell" column="tell" />
 		<result property="regdate" column="regdate" />
 		<result property="updatedate" column="updatedate" />
 		<collection property="authList" resultMap="authMap">
@@ -23,7 +25,7 @@
 	
 	<select id="read" resultMap="memberMap">
 		SELECT
-			mem.userid, userpw, username, regdate, updatedate, enabled, auth
+			mem.userid, userpw, username, useremail, tell, regdate, updatedate, enabled, auth
 		FROM
 			shop_member mem LEFT OUTER JOIN shop_member_auth auth on mem.userid = auth.userid
 		WHERE
@@ -31,8 +33,8 @@
 	</select>
 	
 	<insert id="memberJoin" parameterType="com.kook.shop.domain.MemberVO">
-		INSERT INTO SHOP_MEMBER(USERID, USERPW, USERNAME)
-		VALUES(#{userid}, #{userpw}, #{username})	
+		INSERT INTO SHOP_MEMBER(USERID, USERPW, USERNAME, USEREMAIL, TELL)
+		VALUES(#{userid}, #{userpw}, #{username}, #{useremail}, #{tell})	
 	</insert>
 	
 	<insert id="memberAuth" parameterType="com.kook.shop.domain.AuthVO">

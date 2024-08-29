@@ -22,8 +22,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<!--iamport -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!--icon -->
 <!--fontawesome icon-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
@@ -60,6 +58,9 @@
                 	</li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
+                	<li class="nav-item mx-0 mx-lg-1">
+                		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="../member/custom">마이페이지</a>
+                	</li>
                 	<li class="nav-item mx-0 mx-lg-1">
                 		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="../member/customLogout">로그아웃</a>
                 	</li>

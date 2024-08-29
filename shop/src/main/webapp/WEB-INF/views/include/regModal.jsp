@@ -29,7 +29,6 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="attach col-md-5">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         <div>
                         	<label for="upload">&nbsp;&nbsp;&nbsp;상품 이미지:</label>
                         </div>
@@ -76,15 +75,6 @@ $(document).ready(function(){
 	let maxSize = 5242880; //5MB
 	
 	let uploadUL = $(".uploadResult #cardRow");
-	
-	//security csrf설정
-	let csrfHeaderName = "${_csrf.headerName}";
-	let csrfTokenValue = "${_csrf.token}";
-	
-	//beforeSend대신 사용(한번만 지정)
-	$(document).ajaxSend(function(e, xhr, options){
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	});
 	
 	//파일 업로드 이벤트 처리
 	$("input[type='file']").change(function(e){

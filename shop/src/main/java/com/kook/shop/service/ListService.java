@@ -13,6 +13,9 @@ public interface ListService {
 	//상품 확인
 	public ListVO get(Long rno);
 	
+	//상품 이름으로 확인
+	public ListVO getBySname(String sname);
+	
 	//상품 수정
 	public int modify(ListVO vo);
 	

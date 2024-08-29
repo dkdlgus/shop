@@ -95,6 +95,22 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<div class="row mb-3" id="font_size">
+					<label for="email" class="col-md-4 col-form-label" id="fst">이메일<span style="color: red">*</span></label>
+					<div class="col-md-5" id="sst">
+						<input type="text" class="form-control" name="useremail" id="email" placeholder="이메일을 입력해주세요." required/>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row mb-3" id="font_size">
+					<label for="tell" class="col-md-4 col-form-label" id="fst">연락처<span style="color: red">*</span></label>
+					<div class="col-md-5" id="sst">
+						<input type="text" class="form-control" name="tell" id="tell" placeholder="연락처를 입력해주세요." required/>
+					</div>
+				</div>
+			</div>
 			
 			<div class="boder_btom"></div>
 			<div id="formSubmit" class="form_footer">

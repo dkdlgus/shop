@@ -41,15 +41,15 @@ public class MemberServiceImpl implements MemberService {
 		
 		String userid = vo.getUserid();
 		
-		String userpw = vo.getUserpw(); //패스워드
+		String userpw = vo.getUserpw(); //�뙣�뒪�썙�뱶
 		
-		String bcriptPw = passwordEncoder.encode(userpw); //암호화된 패스워드
+		String bcriptPw = passwordEncoder.encode(userpw); //�븫�샇�솕�맂 �뙣�뒪�썙�뱶
 		
 		vo.setUserpw(bcriptPw);
 		
 		AuthVO auth = new AuthVO();
 		
-		auth.setAuth("ROLE_MEMBER"); //권한은 일반 회원으로 초기화
+		auth.setAuth("ROLE_MEMBER"); //沅뚰븳�� �씪諛� �쉶�썝�쑝濡� 珥덇린�솕
 		auth.setUserid(userid);
 		
 		Mmapper.memberJoin(vo);

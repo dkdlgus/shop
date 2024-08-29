@@ -101,5 +101,11 @@ public class ListServiceImpl implements ListService {
 		
 		return Imapper.findByRno(rno);
 	}
+	
+	@Override
+	public ListVO getBySname(String sname) {
+		
+		return Lmapper.getBySname(sname);
+	}
 
 }
